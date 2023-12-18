@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  reports:
+    build: ./Warehouse.Reports
+    container_name: reports
+    restart: unless-stopped
+    ports:
+      - 5004:80
+    networks:
+      - warehouse
+      
+  domain:
+    build: ./Warehouse.Domain
+    container_name: domain
+    restart: unless-stopped
+    ports:
+      - 5003:80
+    networks:
+      - warehouse
+      
+  database:
+    build: ./Warehouse.Database
+    container_name: database
+    restart: unless-stopped
+    ports:
+      - 5002:80
+    networks:
+      - warehouse
+      
+  authorization:
+    build: ./Warehouse.Authorization
+    container_name: authorization
+    restart: unless-stopped
+    ports:
+      - 5001:80
+    networks:
+      - warehouse
